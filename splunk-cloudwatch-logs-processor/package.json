@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint -c ../.eslintrc --ignore-path ../.eslintignore .",
-    "test": "node integration-test.js",
+    "test": "sam local invoke SplunkCloudWatchLogsProcessorFunction -e sampleEvent.json",
     "clean": "rm -f splunk-cloudwatch-logs-processor.zip",
     "postinstall": "node -e \"var s='../lib',d='lib',fs=require('fs');fs.exists(d,function(e){e||fs.symlinkSync(s,d,'dir')});\"",
     "pretest": "npm run lint",
