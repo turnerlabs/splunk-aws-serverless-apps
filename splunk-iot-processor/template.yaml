@@ -33,11 +33,11 @@ Outputs:
       Value: !GetAtt IoTFunction.Arn
 
 Resources:
-  IoTFunction: 
+  IoTFunction:
     Type: AWS::Serverless::Function
-    Properties: 
+    Properties:
       Handler: index.handler
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       CodeUri: ./splunk-iot-processor.zip
       Description: Capture events from IOT topic and send to Splunk HTTP event collector
       MemorySize: 512
@@ -46,9 +46,9 @@ Resources:
           Variables:
             SPLUNK_HEC_URL: !Ref SplunkHttpEventCollectorURL
             SPLUNK_HEC_TOKEN: !Ref SplunkHttpEventCollectorToken
-      Events: 
-        IoT: 
+      Events:
+        IoT:
           Type: IoTRule
-          Properties: 
+          Properties:
             AwsIotSqlVersion: !Ref IoTSqlVersion
             Sql: !Join [ "", [ "SELECT * FROM '", !Ref IoTTopicFilter, "'"] ]

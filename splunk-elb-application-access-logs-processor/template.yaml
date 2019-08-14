@@ -15,7 +15,7 @@ Parameters:
   S3ALBLogsBucketName:
     Type: "String"
     Description: "Name of S3 bucket that will store access logs. This bucket will be created for you. Name must be unique across all existing bucket names in Amazon S3."
-  
+
   S3Prefix:
     Type: "String"
     Description: "Optional prefix to limit the notifications to objects with keys that start with matching characters. e.g. uploadedImages/"
@@ -33,7 +33,7 @@ Parameters:
   SplunkHttpEventCollectorToken:
     Type: "String"
     Description: "Token of your Splunk HTTP event collector endpoint"
-    
+
 Outputs:
     SplunkALBLogsProcessor:
       Description: "Splunk S3 Bucket Stream Lambda Function ARN"
@@ -45,7 +45,7 @@ Resources:
     Properties:
       Description: Stream ALB events from S3 to Splunk HTTP event collector
       Handler: index.handler
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       CodeUri: ./splunk-elb-application-access-logs-processor.zip
       Policies:
         - S3CrudPolicy:

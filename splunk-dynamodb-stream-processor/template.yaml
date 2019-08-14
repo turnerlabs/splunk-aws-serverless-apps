@@ -4,22 +4,22 @@ Description: >
     Serverless application to stream events from AWS DynamoDB Stream to Splunk HTTP Event Collector (HEC).
 
     This SAM template creates the Lambda function with its IAM execution role, a subscription to DynamoDB table
-    along with a Lambda permission to grant DynamoDB permission to invoke this function. 
+    along with a Lambda permission to grant DynamoDB permission to invoke this function.
     DynamoDB must be in same region as the region where this stack is created.
 
     Last Modified: 29 Nov, 2017
     Authors: Roy Arsan <roy@splunk.com>, Tarik Makota <tmak@amazon.com>
 
 Parameters:
-  DynamoDBTableName: 
+  DynamoDBTableName:
     Type: "String"
     Description: "Name of DynamoDB table. The Lambda function will be invoked whenever this table is updated."
-    
+
   DynamoDBStreamARN:
     Type: "String"
     Description: "ARN of DynamoDB table Stream. The Lambda function will be invoked whenever this stream is updated."
-  
-  DynamoDBStreamBatchSize: 
+
+  DynamoDBStreamBatchSize:
     Type: "Number"
     Description: "The largest number of records that AWS Lambda will retrieve from your table at the time of invoking your function. Your function receives an event with all the retrieved records."
     Default: "100"
@@ -27,7 +27,7 @@ Parameters:
   DynamoDBStreamStartingPosition:
     Type: "String"
     Description: "The position in the stream where AWS Lambda should start reading. Allowed values are 'TRIM_HORIZON' or 'LATEST'. For more information, see ShardIteratorType in the Amazon DynamoDB API Reference."
-    Default: "LATEST" 
+    Default: "LATEST"
 
   SplunkHttpEventCollectorURL:
     Type: "String"
@@ -47,7 +47,7 @@ Resources:
       Type: 'AWS::Serverless::Function'
       Properties:
         Handler: index.handler
-        Runtime: nodejs6.10
+        Runtime: nodejs8.10
         CodeUri: ./splunk-dynamodb-stream-processor.zip
         Policies:
           - DynamoDBStreamReadPolicy:
@@ -67,4 +67,3 @@ Resources:
               Stream: !Ref DynamoDBStreamARN
               StartingPosition: !Ref DynamoDBStreamStartingPosition
               BatchSize: !Ref DynamoDBStreamBatchSize
-  

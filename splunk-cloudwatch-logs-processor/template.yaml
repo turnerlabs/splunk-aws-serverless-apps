@@ -11,7 +11,7 @@ Description: >
     Authors: Roy Arsan <roy@splunk.com>, Tarik Makota <tmak@amazon.com>
 
 Parameters:
-    CloudWatchLogsGroupName: 
+    CloudWatchLogsGroupName:
       Type: "String"
       Description: "Name of a CloudWatch log group (must be in the same region)"
 
@@ -39,7 +39,7 @@ Resources:
 
     CloudWatchLogsLambdaPermission:
       Type: "AWS::Lambda::Permission"
-      Properties: 
+      Properties:
         Action: "lambda:InvokeFunction"
         FunctionName: !GetAtt SplunkCloudWatchLogsProcessorFunction.Arn
         Principal: !Join
@@ -54,7 +54,7 @@ Resources:
       Type: 'AWS::Serverless::Function'
       Properties:
         Handler: index.handler
-        Runtime: nodejs6.10
+        Runtime: nodejs8.10
         CodeUri: ./splunk-cloudwatch-logs-processor.zip
         Description: Stream events from AWS CloudWatch Logs to Splunk HTTP event collector
         MemorySize: 512
@@ -64,4 +64,3 @@ Resources:
             SPLUNK_HEC_URL: !Ref SplunkHttpEventCollectorURL
             SPLUNK_HEC_TOKEN: !Ref SplunkHttpEventCollectorToken
 
-  
