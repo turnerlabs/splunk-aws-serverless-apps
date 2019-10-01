@@ -1,7 +1,7 @@
 node_modules
 npm-debug.log
 .DS_Store
-# environment setting file 
+# environment setting file
 .npmrc
 
 # backup for local testing
@@ -13,3 +13,4 @@ packaged-template.yaml
 template.output.yaml
 lib
 setEnv.sh
+package-lock.json

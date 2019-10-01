@@ -7,8 +7,8 @@ Description: >
     function includes the JavaScript client library for logging to Splunk HEC:
     https://github.com/splunk/splunk-javascript-logging
 
-    Last Modified: 06 Oct, 2017
-    Authors: Roy Arsan <roy@splunk.com>, Tarik Makota <tmak@amazon.com>
+    Last Modified: 14-Aug-2019 by Chris Farris <chris.farris@turner.com> to support nodejs8.10
+    Original Authors: Roy Arsan <roy@splunk.com>, Tarik Makota <tmak@amazon.com>
 
 Parameters:
     SplunkHttpEventCollectorURL:
@@ -39,4 +39,4 @@ Resources:
             SPLUNK_HEC_URL: !Ref SplunkHttpEventCollectorURL
             SPLUNK_HEC_TOKEN: !Ref SplunkHttpEventCollectorToken
 
-  
+
